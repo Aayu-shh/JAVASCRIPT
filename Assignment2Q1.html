@@ -1,21 +1,73 @@
-var time = "9:09:59AM"
-    var pmCheck =time.includes("PM");
-    var hrs=parseInt(time.split(":")[0]);
-    var newtime='';
-    // this is for between  12 AM to 12:59:59AM  = 00:00:00
-    if( hrs == 12  && pmCheck == false){
-        newtime= "00" +':'+ time.split(":")[1] +':'+ time.split(":")[2].replace("AM",'');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var time = "9:10:6AM"
+        var pmCheck = time.includes("PM");
+        var hrs = parseInt(time.split(":")[0]);
+        var min = parseInt(time.split(":")[1]);
+        var sec = 0;
+
+        var hr = "";
+        var mins = "";
+        var secs = "";
+
+        //if PM sec block replacement
+        if (pmCheck) {
+            sec = parseInt(time.split(":")[2].replace("PM", ""));
         }
-    //this is for between  12 PM to 12:59:59 =12:00:00
-    else if (hrs == 12  && pmCheck == true){
-             newtime= "12" +':'+ time.split(":")[1] +':'+ time.split(":")[2].replace("PM",'');
-    }
-    //this is for between 1 AM and 11:59:59 AM
-    else if (!pmCheck){
-        newtime= hrs +':'+ time.split(":")[1] +':'+ time.split(":")[2].replace("AM",'');
-    }
-    //this is for between 1 PM and 11:59:59 PM
-    else if(pmCheck){
-        newtime= (hrs +12)+':'+ time.split(":")[1] +':'+ time.split(":")[2].replace("PM",'');
-    }
-    console.log(newtime);
+        else {
+            sec = parseInt(time.split(":")[2].replace("AM", ""));
+        }
+        if (sec < 10) {
+            secs = "0" + sec;
+        }
+
+        else {
+            secs = sec;
+        }
+
+        if (min < 10) {
+            mins = "0" + min;
+        }
+        else {
+            mins = min;
+        }
+
+
+        var newtime = '';
+        // this is for between 12 AM to 12:59:59AM = 00:00:00
+        if (hrs == 12 && pmCheck == false) {
+            newtime = "00" + ':' + mins + ':' + secs;
+        }
+        //this is for between 12 PM to 12:59:59 =12:00:00
+        else if (hrs == 12 && pmCheck == true) {
+            newtime = "12" + ':' + mins + ':' + secs;
+        }
+
+        //this is for between 1 AM and 11:59:59 AM
+        else if (!pmCheck) {
+            if (hrs < 10) {
+                hr = "0" + hrs;
+            }
+            else {
+                hr = hrs;
+            }
+            newtime = hr + ':' + mins + ':' + secs;
+        }
+        //this is for between 1 PM and 11:59:59 PM
+        else if (pmCheck) {
+            newtime = (hrs + 12) + ':' + mins + ':' + secs;
+        }
+        console.log(newtime);
+    
+    </script>
+    
+</body>
+</html>
+        
