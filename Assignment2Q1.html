@@ -1,0 +1,21 @@
+var time = "9:09:59AM"
+    var pmCheck =time.includes("PM");
+    var hrs=parseInt(time.split(":")[0]);
+    var newtime='';
+    // this is for between  12 AM to 12:59:59AM  = 00:00:00
+    if( hrs == 12  && pmCheck == false){
+        newtime= "00" +':'+ time.split(":")[1] +':'+ time.split(":")[2].replace("AM",'');
+        }
+    //this is for between  12 PM to 12:59:59 =12:00:00
+    else if (hrs == 12  && pmCheck == true){
+             newtime= "12" +':'+ time.split(":")[1] +':'+ time.split(":")[2].replace("PM",'');
+    }
+    //this is for between 1 AM and 11:59:59 AM
+    else if (!pmCheck){
+        newtime= hrs +':'+ time.split(":")[1] +':'+ time.split(":")[2].replace("AM",'');
+    }
+    //this is for between 1 PM and 11:59:59 PM
+    else if(pmCheck){
+        newtime= (hrs +12)+':'+ time.split(":")[1] +':'+ time.split(":")[2].replace("PM",'');
+    }
+    console.log(newtime);
